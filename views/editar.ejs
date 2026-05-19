@@ -1,0 +1,38 @@
+<%- include('encabezado.ejs')  %>
+
+    <form action="/editar" method="post">
+
+        <div class="card mx-auto mt-5" style="width: 25rem;">
+            <div class="card-body">
+                <input type="hidden" name="id" value="<%= fila[0].id %>">
+
+                <label>Nombre del producto</label>
+                <input type="text" name="nombre" class="form-control" required minlength="4" maxlength="30"
+                    value="<%= fila[0].nombre %>">
+
+                <label>Marca</label>
+                <select class="form-select" name="marca">
+                    <% for (let m of marcas) { %>
+                        <option value="<%= m.id %>" <%= (m.id == fila[0].marca) ? 'selected' : '' %> >
+                            <%= m.marca %>
+                        </option>
+                    <% } %>
+                </select>
+
+                <label>Precio</label>
+                <input type="number" name="precio" class="form-control" required min="0" max="1000"
+                    value="<%= fila[0].precio %>">
+
+                <label>Stock</label>
+                <input type="number" name="stock" class="form-control" required min="0" value="<%= fila[0].stock %>">
+
+            </div>
+            <div class="card-footer">
+                <button type="submit" class="btn btn-primary">Modificar</button>
+                <button type="reset" class="btn btn-secondary">Restablecer</button>
+            </div>
+
+        </div>
+    </form>
+
+<%- include('pie_pagina.ejs') %>
